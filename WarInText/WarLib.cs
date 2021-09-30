@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace WarInText
 {
@@ -87,8 +88,9 @@ namespace WarInText
         }
 
         // Shuffle method
-        // Currently not always returning 52 cards
         // FIXED***
+        // Shuffles deck by pulling 1 - 3 cards from the beginning of the deck and then the end
+        // of the deck repeatedly until a new deck is created.
         public static Queue<Card> ShuffleDeck(Queue<Card> initDeck)
         {
             Queue<Card> ShuffledDeck = new Queue<Card>();
@@ -114,7 +116,7 @@ namespace WarInText
 
             return ShuffledDeck;
         }
-        //Three Shuffles
+        // Three Shuffles --> use this method in the program body.
         public static Queue<Card> MultiShuffler(Queue<Card> initDeck)
         {
             Queue<Card> FirstShuffle = new Queue<Card>();
@@ -163,9 +165,9 @@ namespace WarInText
                 if (p1.HandOfCards.Peek().Value >
                     p2.HandOfCards.Peek().Value)
                 {
+                    p1.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
                     p1.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
                     p2.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
-                    p1.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
                     p1.NumberOfCards = p1.HandOfCards.Count; 
                     p2.NumberOfCards = p2.HandOfCards.Count;
                     Console.WriteLine($"{p1.Name} won this round.");
@@ -174,9 +176,9 @@ namespace WarInText
                 else if (p1.HandOfCards.Peek().Value <
                     p2.HandOfCards.Peek().Value)
                 {
+                    p2.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
                     p1.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
                     p2.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
-                    p2.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
                     p1.NumberOfCards = p1.HandOfCards.Count;
                     p2.NumberOfCards = p2.HandOfCards.Count;
                     Console.WriteLine($"{p2.Name} won this round.");
@@ -190,9 +192,8 @@ namespace WarInText
         public static void War(Player p1, Player p2)
         {
             Console.WriteLine("WAR!!!");
-            Console.WriteLine("1");
-            Console.WriteLine("2");
-            Console.WriteLine("3");
+            for (var inc = 1; inc <= 3; inc++)
+                Console.WriteLine(inc);
             Queue<Card> war1 = new Queue<Card>(); Queue<Card> war2 = new Queue<Card>();
             var CardsRemaining = 4;
             // Check to see if either player does not have enough cards to do war.
@@ -208,6 +209,7 @@ namespace WarInText
             }
             Console.WriteLine($"{war1.Last().Name} " +
                 $"-------------{war2.Last().Name}");
+           // Puts war winner cards into the correct deck
             if (war1.Last().Value > war2.Last().Value)
             {
                 while(war1.Count > 0)

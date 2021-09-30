@@ -27,13 +27,6 @@ namespace WarInText
 
             PlayAgain();
 
-
-
-
-
-
-
-
         }
         static void PlayAgain()
         { 
@@ -45,7 +38,7 @@ namespace WarInText
                 return;
             else
             {
-                Console.Write("Please enter a valid character, y or n");
+                Console.Write("Please enter a valid character, y or n ");
                 PlayAgain();
             }
         }
