@@ -13,76 +13,58 @@ namespace WarInText
         public static Queue<Card> DeckAssembler()
         {
             Queue<Card> Deck = new Queue<Card>();
-            var Club2 = new Card("2 of Clubs", 2);
-            var Club3 = new Card("3 of Clubs", 3);
-            var Club4 = new Card("4 of Clubs", 4);
-            var Club5 = new Card("5 of Clubs", 5);
-            var Club6 = new Card("6 of Clubs", 6);
-            var Club7 = new Card("7 of Clubs", 7);
-            var Club8 = new Card("8 of Clubs", 8);
-            var Club9 = new Card("9 of Clubs", 9);
-            var Club10 = new Card("10 of Clubs", 10);
-            var ClubJack = new Card("Jack of Clubs", 11);
-            var ClubQueen = new Card("Queen of Clubs", 12);
-            var ClubKing = new Card("King of Clubs", 13);
-            var ClubAce = new Card("Ace of Clubs", 14);
-            var Diamond2 = new Card("2 of Diamonds", 2);
-            var Diamond3 = new Card("3 of Diamonds", 3);
-            var Diamond4 = new Card("4 of Diamonds", 4);
-            var Diamond5 = new Card("5 of Diamonds", 5);
-            var Diamond6 = new Card("6 of Diamonds", 6);
-            var Diamond7 = new Card("7 of Diamonds", 7);
-            var Diamond8 = new Card("8 of Diamonds", 8);
-            var Diamond9 = new Card("9 of Diamonds", 9);
-            var Diamond10 = new Card("10 of Diamonds", 10);
-            var DiamondJack = new Card("Jack of Diamonds", 11);
-            var DiamondQueen = new Card("Queen of Diamonds", 12);
-            var DiamondKing = new Card("King of Diamonds", 13);
-            var DiamondAce = new Card("Ace of Diamonds", 14);
-            var Heart2 = new Card("2 of Hearts", 2);
-            var Heart3 = new Card("3 of Hearts", 3);
-            var Heart4 = new Card("4 of Hearts", 4);
-            var Heart5 = new Card("5 of Hearts", 5);
-            var Heart6 = new Card("6 of Hearts", 6);
-            var Heart7 = new Card("7 of Hearts", 7);
-            var Heart8 = new Card("8 of Hearts", 8);
-            var Heart9 = new Card("9 of Hearts", 9);
-            var Heart10 = new Card("10 of Hearts", 10);
-            var HeartJack = new Card("Jack of Hearts", 11);
-            var HeartQueen = new Card("Queen of Hearts", 12);
-            var HeartKing = new Card("King of Hearts", 13);
-            var HeartAce = new Card("Ace of Hearts", 14);
-            var Spade2 = new Card("2 of Spades", 2);
-            var Spade3 = new Card("3 of Spades", 3);
-            var Spade4 = new Card("4 of Spades", 4);
-            var Spade5 = new Card("5 of Spades", 5);
-            var Spade6 = new Card("6 of Spades", 6);
-            var Spade7 = new Card("7 of Spades", 7);
-            var Spade8 = new Card("8 of Spades", 8);
-            var Spade9 = new Card("9 of Spades", 9);
-            var Spade10 = new Card("10 of Spades", 10);
-            var SpadeJack = new Card("Jack of Spades", 11);
-            var SpadeQueen = new Card("Queen of Spades", 12);
-            var SpadeKing = new Card("King of Spades", 13);
-            var SpadeAce = new Card("Ace of Spades", 14);
-
-            Deck.Enqueue(Club2); Deck.Enqueue(Club3); Deck.Enqueue(Club4); Deck.Enqueue(Club5);
-            Deck.Enqueue(Club6); Deck.Enqueue(Club7); Deck.Enqueue(Club8); Deck.Enqueue(Club9);
-            Deck.Enqueue(Club10); Deck.Enqueue(ClubJack); Deck.Enqueue(ClubQueen);
-            Deck.Enqueue(ClubKing); Deck.Enqueue(ClubAce); Deck.Enqueue(Diamond2);
-            Deck.Enqueue(Diamond3); Deck.Enqueue(Diamond4); Deck.Enqueue(Diamond5);
-            Deck.Enqueue(Diamond6); Deck.Enqueue(Diamond7); Deck.Enqueue(Diamond8);
-            Deck.Enqueue(Diamond9); Deck.Enqueue(Diamond10); Deck.Enqueue(DiamondJack);
-            Deck.Enqueue(DiamondQueen); Deck.Enqueue(DiamondKing); Deck.Enqueue(DiamondAce);
-            Deck.Enqueue(Heart2); Deck.Enqueue(Heart3); Deck.Enqueue(Heart4); Deck.Enqueue(Heart5);
-            Deck.Enqueue(Heart6); Deck.Enqueue(Heart7); Deck.Enqueue(Heart8); Deck.Enqueue(Heart9);
-            Deck.Enqueue(Heart10); Deck.Enqueue(HeartJack); Deck.Enqueue(HeartQueen);
-            Deck.Enqueue(HeartKing); Deck.Enqueue(HeartAce); Deck.Enqueue(Spade2);
-            Deck.Enqueue(Spade3); Deck.Enqueue(Spade4); Deck.Enqueue(Spade5); Deck.Enqueue(Spade6);
-            Deck.Enqueue(Spade7); Deck.Enqueue(Spade8); Deck.Enqueue(Spade9);
-            Deck.Enqueue(Spade10); Deck.Enqueue(SpadeJack); Deck.Enqueue(SpadeQueen);
-            Deck.Enqueue(SpadeKing); Deck.Enqueue(SpadeAce);
-
+            Deck.Enqueue( new Card("2 of Clubs", 2));
+            Deck.Enqueue(new Card("3 of Clubs", 3));
+            Deck.Enqueue(new Card("4 of Clubs", 4));
+            Deck.Enqueue( new Card("6 of Clubs", 6));
+            Deck.Enqueue( new Card("7 of Clubs", 7));
+            Deck.Enqueue( new Card("8 of Clubs", 8));
+            Deck.Enqueue( new Card("9 of Clubs", 9));
+            Deck.Enqueue( new Card("10 of Clubs", 10));
+            Deck.Enqueue(new Card("5 of Clubs", 5));
+            Deck.Enqueue( new Card("Jack of Clubs", 11));
+            Deck.Enqueue( new Card("Queen of Clubs", 12));
+            Deck.Enqueue( new Card("King of Clubs", 13));
+            Deck.Enqueue(new Card("Ace of Clubs", 14));
+            Deck.Enqueue( new Card("2 of Diamonds", 2));
+            Deck.Enqueue( new Card("3 of Diamonds", 3));
+            Deck.Enqueue( new Card("4 of Diamonds", 4));
+            Deck.Enqueue( new Card("5 of Diamonds", 5));
+            Deck.Enqueue( new Card("6 of Diamonds", 6));
+            Deck.Enqueue( new Card("7 of Diamonds", 7));
+            Deck.Enqueue( new Card("8 of Diamonds", 8));
+            Deck.Enqueue(new Card("9 of Diamonds", 9));
+            Deck.Enqueue(new Card("10 of Diamonds", 10));
+            Deck.Enqueue(new Card("Jack of Diamonds", 11));
+            Deck.Enqueue(new Card("Queen of Diamonds", 12));
+            Deck.Enqueue(new Card("King of Diamonds", 13));
+            Deck.Enqueue(new Card("Ace of Diamonds", 14));
+            Deck.Enqueue(new Card("2 of Hearts", 2));
+            Deck.Enqueue(new Card("3 of Hearts", 3));
+            Deck.Enqueue(new Card("4 of Hearts", 4));
+            Deck.Enqueue(new Card("5 of Hearts", 5));
+            Deck.Enqueue(new Card("6 of Hearts", 6));
+            Deck.Enqueue(new Card("7 of Hearts", 7));
+            Deck.Enqueue(new Card("8 of Hearts", 8));
+            Deck.Enqueue(new Card("9 of Hearts", 9));
+            Deck.Enqueue( new Card("10 of Hearts", 10));
+            Deck.Enqueue( new Card("Jack of Hearts", 11));
+            Deck.Enqueue( new Card("Queen of Hearts", 12));
+            Deck.Enqueue(new Card("King of Hearts", 13));
+            Deck.Enqueue(new Card("Ace of Hearts", 14));
+            Deck.Enqueue(new Card("2 of Spades", 2));
+            Deck.Enqueue(new Card("3 of Spades", 3));
+            Deck.Enqueue(new Card("4 of Spades", 4));
+            Deck.Enqueue(new Card("5 of Spades", 5));
+            Deck.Enqueue(new Card("6 of Spades", 6));
+            Deck.Enqueue(new Card("7 of Spades", 7));
+            Deck.Enqueue(new Card("8 of Spades", 8));
+            Deck.Enqueue(new Card("9 of Spades", 9));
+            Deck.Enqueue(new Card("10 of Spades", 10));
+            Deck.Enqueue(new Card("Jack of Spades", 11));
+            Deck.Enqueue( new Card("Queen of Spades", 12));
+            Deck.Enqueue(new Card("King of Spades", 13));
+            Deck.Enqueue(new Card("Ace of Spades", 14));
             return Deck;
 
         }
@@ -199,6 +181,8 @@ namespace WarInText
 
             }
         }
+        // This method needs a fix for the cards pulled to the side for the war to take place. Currently
+        // I don't believe they get passed back into the player decks and are 
         public static void War(Player p1, Player p2)
         {
             Console.WriteLine("WAR!!!");
@@ -248,9 +232,61 @@ namespace WarInText
                 Console.WriteLine($"{p2.Name} won the war!");
             }
             else
-                War(p1, p2);
+                MultiWar(p1, p2, war1, war2);
         }
+        public static void MultiWar(Player p1, Player p2, Queue<Card> w1, Queue<Card> w2)
+        {
+            Console.WriteLine("WAR!!!");
+            for (var inc = 1; inc <= 3; inc++)
+                Console.WriteLine(inc);
+            Queue<Card> war1 = new Queue<Card>(); Queue<Card> war2 = new Queue<Card>();
+            var CardsRemaining = 4;
+            // Check to see if either player does not have enough cards to do war.
+            if (p1.HandOfCards.Count < 4 || p2.HandOfCards.Count < 4 &&
+                p1.HandOfCards.Count > 0 && p2.HandOfCards.Count > 0)
+            {
+                CardsRemaining = Math.Min(p1.HandOfCards.Count, p2.HandOfCards.Count);
+            }
+            // Bug fix for the case where the war card played by the player is their last card
+            else if (p1.HandOfCards.Count == 0 || p2.HandOfCards.Count == 0)
+            {
+                return;
+            }
+            war1.Enqueue(w1.Dequeue()); war2.Enqueue(w2.Dequeue());
+            for (int i = 1; i <= CardsRemaining; i++)
+            {
+                
+                war1.Enqueue(p1.HandOfCards.Dequeue());
+                war2.Enqueue(p2.HandOfCards.Dequeue());
 
+            }
+            Console.WriteLine($"{war1.Last().Name} " +
+                $"-------------{war2.Last().Name}");
+            // Puts war winner cards into the correct deck
+            if (war1.Last().Value > war2.Last().Value)
+            {
+                while (war1.Count > 0)
+                    p1.HandOfCards.Enqueue(war1.Dequeue());
+                while (war2.Count > 0)
+                    p1.HandOfCards.Enqueue(war2.Dequeue());
+                p1.NumberOfCards = p1.HandOfCards.Count;
+                p2.NumberOfCards = p2.HandOfCards.Count;
+
+                Console.WriteLine($"{p1.Name} won the war!");
+            }
+            else if (war1.Last().Value < war2.Last().Value)
+            {
+                while (war1.Count > 0)
+                    p2.HandOfCards.Enqueue(war1.Dequeue());
+                while (war2.Count > 0)
+                    p2.HandOfCards.Enqueue(war2.Dequeue());
+                p1.NumberOfCards = p1.HandOfCards.Count;
+                p2.NumberOfCards = p2.HandOfCards.Count;
+                Console.WriteLine($"{p2.Name} won the war!");
+            }
+            else
+                MultiWar(p1, p2, war1, war2);
+        }
 
 
 
