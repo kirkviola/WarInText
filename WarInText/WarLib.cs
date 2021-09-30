@@ -166,17 +166,27 @@ namespace WarInText
                     p2.HandOfCards.Peek().Value)
                 {
                     p1.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
+                    if (CheckHand(p1, p2))
+                    {
+                        isOver = IsOver(p1, p2);
+                        continue;
+                    }
                     p1.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
                     p2.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
-                    p1.NumberOfCards = p1.HandOfCards.Count; 
+                    p1.NumberOfCards = p1.HandOfCards.Count;
                     p2.NumberOfCards = p2.HandOfCards.Count;
                     Console.WriteLine($"{p1.Name} won this round.");
-                   
+
                 }
                 else if (p1.HandOfCards.Peek().Value <
                     p2.HandOfCards.Peek().Value)
                 {
                     p2.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
+                    if (CheckHand(p1, p2))
+                    {
+                        isOver = IsOver(p1, p2);
+                        continue;
+                    }
                     p1.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
                     p2.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
                     p1.NumberOfCards = p1.HandOfCards.Count;
@@ -186,7 +196,7 @@ namespace WarInText
                 else
                     War(p1, p2);
                 isOver = IsOver(p1, p2);
-                
+
             }
         }
         public static void War(Player p1, Player p2)
@@ -197,9 +207,15 @@ namespace WarInText
             Queue<Card> war1 = new Queue<Card>(); Queue<Card> war2 = new Queue<Card>();
             var CardsRemaining = 4;
             // Check to see if either player does not have enough cards to do war.
-            if (p1.HandOfCards.Count < 4 || p2.HandOfCards.Count < 4)
+            if (p1.HandOfCards.Count < 4 || p2.HandOfCards.Count < 4 &&
+                p1.HandOfCards.Count > 0 && p2.HandOfCards.Count > 0)
             {
                 CardsRemaining = Math.Min(p1.HandOfCards.Count, p2.HandOfCards.Count);
+            }
+            // Bug fix for the case where the war card played by the player is their last card
+            else if (p1.HandOfCards.Count == 0 || p2.HandOfCards.Count == 0)
+            {
+                return;
             }
             for (int i = 1; i <= CardsRemaining; i++)
             {
@@ -209,12 +225,12 @@ namespace WarInText
             }
             Console.WriteLine($"{war1.Last().Name} " +
                 $"-------------{war2.Last().Name}");
-           // Puts war winner cards into the correct deck
+            // Puts war winner cards into the correct deck
             if (war1.Last().Value > war2.Last().Value)
             {
-                while(war1.Count > 0)
+                while (war1.Count > 0)
                     p1.HandOfCards.Enqueue(war1.Dequeue());
-                while(war2.Count > 0)
+                while (war2.Count > 0)
                     p1.HandOfCards.Enqueue(war2.Dequeue());
                 p1.NumberOfCards = p1.HandOfCards.Count;
                 p2.NumberOfCards = p2.HandOfCards.Count;
@@ -223,7 +239,7 @@ namespace WarInText
             }
             else if (war1.Last().Value < war2.Last().Value)
             {
-                while(war1.Count > 0)
+                while (war1.Count > 0)
                     p2.HandOfCards.Enqueue(war1.Dequeue());
                 while (war2.Count > 0)
                     p2.HandOfCards.Enqueue(war2.Dequeue());
@@ -242,6 +258,18 @@ namespace WarInText
         static bool IsOver(Player p1, Player p2)
         {
             if (p1.NumberOfCards == 0 || p2.NumberOfCards == 0)
+                return true;
+            else
+                return false;
+        }
+
+        // Quick method to check whether a player has 0 cards at any given
+        // Moment to handle the "Queue emptly" exception.
+        static bool CheckHand(Player p1, Player p2)
+        {
+            p1.NumberOfCards = p1.HandOfCards.Count;
+            p2.NumberOfCards = p2.HandOfCards.Count;
+            if (p1.NumberOfCards == 0 || p2.NumberOfCards == 0 )
                 return true;
             else
                 return false;
