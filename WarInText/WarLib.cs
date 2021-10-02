@@ -134,12 +134,30 @@ namespace WarInText
             }
 
         }
-        // Method that plays a hand of cards
-        public static void PlayHand(Player p1, Player p2)
+        // Method to use the enter key to play a hand
+        public static void KeyPress(Player p1, Player p2)
         {
-            bool isOver = IsOver(p1, p2);
+            bool isOver = false;
             while (!isOver)
             {
+                var key = Console.ReadKey().Key;
+                if (key == ConsoleKey.Enter)
+                {
+                    isOver = PlayHand(p1, p2, isOver);
+                }
+                else
+                {
+                    Console.WriteLine(": Invalid Key Press. Try again");
+                    continue;
+                }
+
+            }
+        }
+        // Method that plays a hand of cards
+        public static bool PlayHand(Player p1, Player p2, bool isOver)
+        {
+             isOver = IsOver(p1, p2);
+            
 
                 Console.WriteLine($"{p1.Name} ---------------- {p2.Name}");
                 Console.WriteLine($"{p1.HandOfCards.First().Name} " +
@@ -148,10 +166,10 @@ namespace WarInText
                     p2.HandOfCards.First().Value)
                 {
                     p1.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
-                    if (CheckHand(p1, p2))
+                    if (IsOver(p1, p2))
                     {
                         isOver = IsOver(p1, p2);
-                        continue;
+                    return isOver;
                     }
                     p1.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
                     p2.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
@@ -162,10 +180,10 @@ namespace WarInText
                     p2.HandOfCards.First().Value)
                 {
                     p2.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
-                    if (CheckHand(p1, p2))
+                    if (IsOver(p1, p2))
                     {
                         isOver = IsOver(p1, p2);
-                        continue;
+                        return isOver;
                     }
                     p1.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
                     p2.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
@@ -184,16 +202,16 @@ namespace WarInText
                             Console.WriteLine($"{p1.Name} ran out of cards!");
                         else
                             Console.WriteLine($"{p2.Name} ran out of cards!");
-                        continue;
+                    return isOver;
                     }
                     War(p1, p2);
                 }
                 isOver = IsOver(p1, p2);
+                return isOver;
 
-            }
+            
         }
-        // This method needs a fix for the cards pulled to the side for the war to take place. Currently
-        // I don't believe they get passed back into the player decks and are 
+
         public static void War(Player p1, Player p2)
         {
             Console.WriteLine("WAR!!!");
@@ -228,8 +246,7 @@ namespace WarInText
                     p1.HandOfCards.Enqueue(war1.Dequeue());
                 while (war2.Count > 0)
                     p1.HandOfCards.Enqueue(war2.Dequeue());
-                p1.NumberOfCards = p1.HandOfCards.Count;
-                p2.NumberOfCards = p2.HandOfCards.Count;
+ 
 
                 Console.WriteLine($"{p1.Name} won the war!");
             }
@@ -325,15 +342,7 @@ namespace WarInText
                 return false;
         }
 
-        // Quick method to check whether a player has 0 cards at any given
-        // Moment to handle the "Queue emptly" exception.
-        static bool CheckHand(Player p1, Player p2)
-        {
-            if (p1.HandOfCards.Count == 0 || p2.HandOfCards.Count == 0 )
-                return true;
-            else
-                return false;
-        }
+
     }
 }
 
