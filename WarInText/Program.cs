@@ -20,7 +20,7 @@ namespace WarInText
             WarLib.Deal(ShuffledDeck, Player1, Player2);
             WarLib.PlayHand(Player1, Player2);
 
-            if(Player1.NumberOfCards != 0)
+            if(Player1.HandOfCards.Count != 0)
                 Console.WriteLine($"Congratulations, {Player1.Name}, you are the winner!");
             else
                 Console.WriteLine($"Congratulations, {Player2.Name}, you are the winner!");

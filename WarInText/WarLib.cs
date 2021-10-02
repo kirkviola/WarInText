@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace WarInText
 {
-    class WarLib
+    static class WarLib
     {
         // Initialize creating deck of cards and storing in queue
         public static Queue<Card> DeckAssembler()
@@ -138,14 +138,14 @@ namespace WarInText
         public static void PlayHand(Player p1, Player p2)
         {
             bool isOver = IsOver(p1, p2);
-            while (isOver == false)
+            while (!isOver)
             {
 
                 Console.WriteLine($"{p1.Name} ---------------- {p2.Name}");
-                Console.WriteLine($"{p1.HandOfCards.Peek().Name} " +
-                    $"-------------{p2.HandOfCards.Peek().Name}");
-                if (p1.HandOfCards.Peek().Value >
-                    p2.HandOfCards.Peek().Value)
+                Console.WriteLine($"{p1.HandOfCards.First().Name} " +
+                    $"-------------{p2.HandOfCards.First().Name}");
+                if (p1.HandOfCards.First().Value >
+                    p2.HandOfCards.First().Value)
                 {
                     p1.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
                     if (CheckHand(p1, p2))
@@ -155,13 +155,11 @@ namespace WarInText
                     }
                     p1.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
                     p2.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
-                    p1.NumberOfCards = p1.HandOfCards.Count;
-                    p2.NumberOfCards = p2.HandOfCards.Count;
                     Console.WriteLine($"{p1.Name} won this round.");
 
                 }
-                else if (p1.HandOfCards.Peek().Value <
-                    p2.HandOfCards.Peek().Value)
+                else if (p1.HandOfCards.First().Value <
+                    p2.HandOfCards.First().Value)
                 {
                     p2.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
                     if (CheckHand(p1, p2))
@@ -171,11 +169,10 @@ namespace WarInText
                     }
                     p1.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
                     p2.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
-                    p1.NumberOfCards = p1.HandOfCards.Count;
-                    p2.NumberOfCards = p2.HandOfCards.Count;
                     Console.WriteLine($"{p2.Name} won this round.");
                 }
-                else
+                else if (p1.HandOfCards.First().Value ==
+                        p2.HandOfCards.First().Value)
                     War(p1, p2);
                 isOver = IsOver(p1, p2);
 
@@ -239,7 +236,10 @@ namespace WarInText
             Console.WriteLine("WAR!!!");
             for (var inc = 1; inc <= 3; inc++)
                 Console.WriteLine(inc);
+           
+            // Creates multi war decks
             Queue<Card> war1 = new Queue<Card>(); Queue<Card> war2 = new Queue<Card>();
+            
             var CardsRemaining = 4;
             // Check to see if either player does not have enough cards to do war.
             if (p1.HandOfCards.Count < 4 || p2.HandOfCards.Count < 4 &&
@@ -252,7 +252,6 @@ namespace WarInText
             {
                 return;
             }
-            war1.Enqueue(w1.Dequeue()); war2.Enqueue(w2.Dequeue());
             for (int i = 1; i <= CardsRemaining; i++)
             {
                 
@@ -269,9 +268,10 @@ namespace WarInText
                     p1.HandOfCards.Enqueue(war1.Dequeue());
                 while (war2.Count > 0)
                     p1.HandOfCards.Enqueue(war2.Dequeue());
-                p1.NumberOfCards = p1.HandOfCards.Count;
-                p2.NumberOfCards = p2.HandOfCards.Count;
-
+                while(w1.Count > 0)
+                    p1.HandOfCards.Enqueue(w1.Dequeue());
+                while(w2.Count > 0)
+                    p1.HandOfCards.Enqueue(w2.Dequeue());
                 Console.WriteLine($"{p1.Name} won the war!");
             }
             else if (war1.Last().Value < war2.Last().Value)
@@ -280,12 +280,21 @@ namespace WarInText
                     p2.HandOfCards.Enqueue(war1.Dequeue());
                 while (war2.Count > 0)
                     p2.HandOfCards.Enqueue(war2.Dequeue());
-                p1.NumberOfCards = p1.HandOfCards.Count;
-                p2.NumberOfCards = p2.HandOfCards.Count;
+                while (w1.Count > 0)
+                    p2.HandOfCards.Enqueue(w1.Dequeue());
+                while (w2.Count > 0)
+                    p2.HandOfCards.Enqueue(w2.Dequeue());
                 Console.WriteLine($"{p2.Name} won the war!");
             }
             else
+            {
+                while (w1.Count > 0)
+                    war1.Enqueue(w1.Dequeue());
+                while (w2.Count > 0)
+                    war2.Enqueue(w2.Dequeue());
                 MultiWar(p1, p2, war1, war2);
+
+            }
         }
 
 
@@ -293,7 +302,7 @@ namespace WarInText
         // Method that checks whether the game is over or not
         static bool IsOver(Player p1, Player p2)
         {
-            if (p1.NumberOfCards == 0 || p2.NumberOfCards == 0)
+            if (p1.HandOfCards.Count == 0 || p2.HandOfCards.Count == 0)
                 return true;
             else
                 return false;
@@ -303,9 +312,7 @@ namespace WarInText
         // Moment to handle the "Queue emptly" exception.
         static bool CheckHand(Player p1, Player p2)
         {
-            p1.NumberOfCards = p1.HandOfCards.Count;
-            p2.NumberOfCards = p2.HandOfCards.Count;
-            if (p1.NumberOfCards == 0 || p2.NumberOfCards == 0 )
+            if (p1.HandOfCards.Count == 0 || p2.HandOfCards.Count == 0 )
                 return true;
             else
                 return false;
