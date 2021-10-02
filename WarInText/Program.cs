@@ -11,14 +11,14 @@ namespace WarInText
             Player Player2 = new Player();
             Player1.PlayerName();
             Player2.ComputerPlayer();
-
-            
             Queue<Card> Deck = new Queue<Card>();
             Deck = WarLib.DeckAssembler();
             Queue<Card> ShuffledDeck = new Queue<Card>();
             ShuffledDeck = WarLib.MultiShuffler(Deck);
             WarLib.Deal(ShuffledDeck, Player1, Player2);
-            WarLib.PlayHand(Player1, Player2);
+            Console.WriteLine("Press < Enter > to play your hand.");
+
+            WarLib.KeyPress(Player1, Player2);
 
             if(Player1.HandOfCards.Count != 0)
                 Console.WriteLine($"Congratulations, {Player1.Name}, you are the winner!");
