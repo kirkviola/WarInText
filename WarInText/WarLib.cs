@@ -173,7 +173,21 @@ namespace WarInText
                 }
                 else if (p1.HandOfCards.First().Value ==
                         p2.HandOfCards.First().Value)
+                {
+                    if (p1.HandOfCards.Count == 1 || p2.HandOfCards.Count == 1)
+                    {
+
+                        p1.HandOfCards.Dequeue();
+                        p2.HandOfCards.Dequeue();
+                        isOver = IsOver(p1, p2);
+                        if (p1.HandOfCards.Count == 0)
+                            Console.WriteLine($"{p1.Name} ran out of cards!");
+                        else
+                            Console.WriteLine($"{p2.Name} ran out of cards!");
+                        continue;
+                    }
                     War(p1, p2);
+                }
                 isOver = IsOver(p1, p2);
 
             }
@@ -189,13 +203,14 @@ namespace WarInText
             var CardsRemaining = 4;
             // Check to see if either player does not have enough cards to do war.
             if (p1.HandOfCards.Count < 4 || p2.HandOfCards.Count < 4 &&
-                p1.HandOfCards.Count > 0 && p2.HandOfCards.Count > 0)
+                p1.HandOfCards.Count > 1 && p2.HandOfCards.Count > 1)
             {
                 CardsRemaining = Math.Min(p1.HandOfCards.Count, p2.HandOfCards.Count);
             }
             // Bug fix for the case where the war card played by the player is their last card
             else if (p1.HandOfCards.Count == 0 || p2.HandOfCards.Count == 0)
             {
+
                 return;
             }
             for (int i = 1; i <= CardsRemaining; i++)
@@ -224,12 +239,14 @@ namespace WarInText
                     p2.HandOfCards.Enqueue(war1.Dequeue());
                 while (war2.Count > 0)
                     p2.HandOfCards.Enqueue(war2.Dequeue());
-                p1.NumberOfCards = p1.HandOfCards.Count;
-                p2.NumberOfCards = p2.HandOfCards.Count;
                 Console.WriteLine($"{p2.Name} won the war!");
             }
             else
+            {
+                if (p1.HandOfCards.Count == 0 || p2.HandOfCards.Count == 0)
+                    return;
                 MultiWar(p1, p2, war1, war2);
+            }
         }
         public static void MultiWar(Player p1, Player p2, Queue<Card> w1, Queue<Card> w2)
         {
