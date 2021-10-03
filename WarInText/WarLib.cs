@@ -174,6 +174,8 @@ namespace WarInText
                     p1.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
                     p2.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
                     Console.WriteLine($"{p1.Name} won this round.");
+                Console.WriteLine($"Current card count {p1.Name}: {p1.HandOfCards.Count}" +
+                                $" {p2.Name}: {p2.HandOfCards.Count}");
 
                 }
                 else if (p1.HandOfCards.First().Value <
@@ -188,7 +190,9 @@ namespace WarInText
                     p1.HandOfCards.Enqueue(p1.HandOfCards.Dequeue());
                     p2.HandOfCards.Enqueue(p2.HandOfCards.Dequeue());
                     Console.WriteLine($"{p2.Name} won this round.");
-                }
+                Console.WriteLine($"Current card count {p1.Name}: {p1.HandOfCards.Count}" +
+                                $" {p2.Name}: {p2.HandOfCards.Count}");
+            }
                 else if (p1.HandOfCards.First().Value ==
                         p2.HandOfCards.First().Value)
                 {
@@ -249,6 +253,8 @@ namespace WarInText
  
 
                 Console.WriteLine($"{p1.Name} won the war!");
+                Console.WriteLine($"Current card count {p1.Name}: {p1.HandOfCards.Count}" +
+                                $" {p2.Name}: {p2.HandOfCards.Count}");
             }
             else if (war1.Last().Value < war2.Last().Value)
             {
@@ -257,6 +263,8 @@ namespace WarInText
                 while (war2.Count > 0)
                     p2.HandOfCards.Enqueue(war2.Dequeue());
                 Console.WriteLine($"{p2.Name} won the war!");
+                Console.WriteLine($"Current card count {p1.Name}: {p1.HandOfCards.Count}" +
+                                $" {p2.Name}: {p2.HandOfCards.Count}");
             }
             else
             {
@@ -307,6 +315,8 @@ namespace WarInText
                 while(w2.Count > 0)
                     p1.HandOfCards.Enqueue(w2.Dequeue());
                 Console.WriteLine($"{p1.Name} won the war!");
+                Console.WriteLine($"Current card count {p1.Name}: {p1.HandOfCards.Count}" +
+                                $" {p2.Name}: {p2.HandOfCards.Count}");
             }
             else if (war1.Last().Value < war2.Last().Value)
             {
@@ -319,6 +329,8 @@ namespace WarInText
                 while (w2.Count > 0)
                     p2.HandOfCards.Enqueue(w2.Dequeue());
                 Console.WriteLine($"{p2.Name} won the war!");
+                Console.WriteLine($"Current card count {p1.Name}: {p1.HandOfCards.Count}" +
+                                $" {p2.Name}: {p2.HandOfCards.Count}");
             }
             else
             {
@@ -330,8 +342,6 @@ namespace WarInText
 
             }
         }
-
-
 
         // Method that checks whether the game is over or not
         static bool IsOver(Player p1, Player p2)
